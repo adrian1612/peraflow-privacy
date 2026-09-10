@@ -3,69 +3,523 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PeraFlow Privacy Policy</title>
+  <meta name="description" content="PeraFlow is a clean personal finance and cashbook app for tracking accounts, transactions, reports, and backups with privacy-first local storage." />
+  <meta name="theme-color" content="#0b1220" />
+  <title>PeraFlow — Personal Finance, Made Clear</title>
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 880px; margin: 0 auto; padding: 32px 20px; color: #1f2937; }
-    h1, h2 { color: #111827; }
-    h1 { margin-bottom: 4px; }
-    .muted { color: #6b7280; }
-    a { color: #2563eb; }
-    code { background: #f3f4f6; padding: 2px 4px; border-radius: 4px; }
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1a2b;
+      --surface: rgba(255,255,255,.065);
+      --surface-strong: rgba(255,255,255,.095);
+      --border: rgba(255,255,255,.11);
+      --text: #f7fbff;
+      --muted: #a9b8ca;
+      --muted-2: #7e91a8;
+      --primary: #43d39e;
+      --primary-2: #79e9c0;
+      --accent: #6da8ff;
+      --dark: #07111f;
+      --shadow: 0 28px 70px rgba(0,0,0,.34);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(67,211,158,.16), transparent 32%),
+        radial-gradient(circle at 92% 14%, rgba(109,168,255,.18), transparent 29%),
+        linear-gradient(180deg, #07111f 0%, #091525 48%, #07111f 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7,17,31,.74);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    nav {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      text-decoration: none;
+      font-size: 1.08rem;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #04130d;
+      background: linear-gradient(145deg, var(--primary-2), var(--primary));
+      box-shadow: 0 10px 30px rgba(67,211,158,.28);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .93rem;
+      font-weight: 650;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      padding: 10px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #fff !important;
+    }
+
+    .hero {
+      padding: 88px 0 72px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid rgba(67,211,158,.28);
+      border-radius: 999px;
+      background: rgba(67,211,158,.08);
+      color: var(--primary-2);
+      font-size: .82rem;
+      font-weight: 750;
+      letter-spacing: .02em;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 6px rgba(67,211,158,.08);
+    }
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(3.1rem, 7vw, 6.1rem);
+      line-height: .96;
+      letter-spacing: -.065em;
+      max-width: 760px;
+    }
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(90deg, #f8fbff 0%, #93efce 52%, #78aefb 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+    .hero-copy {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      margin-bottom: 30px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 19px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 780;
+      border: 1px solid transparent;
+    }
+    .button-primary {
+      background: linear-gradient(145deg, var(--primary-2), var(--primary));
+      color: #04130d;
+      box-shadow: 0 16px 38px rgba(67,211,158,.22);
+    }
+    .button-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: #fff;
+    }
+    .trust-row { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted-2); font-size: .88rem; }
+    .trust-row span { display: inline-flex; align-items: center; gap: 7px; }
+    .trust-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--primary); }
+
+    .app-preview {
+      position: relative;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .glow {
+      position: absolute;
+      inset: 16% 12%;
+      filter: blur(55px);
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(67,211,158,.26), rgba(109,168,255,.18));
+    }
+    .phone {
+      position: relative;
+      width: min(355px, 88vw);
+      border-radius: 40px;
+      padding: 10px;
+      background: linear-gradient(145deg, #283446, #0c1320);
+      box-shadow: 0 38px 90px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.1);
+      transform: rotate(2deg);
+    }
+    .phone-screen {
+      min-height: 600px;
+      border-radius: 32px;
+      padding: 28px 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(109,168,255,.18), transparent 28%),
+        linear-gradient(180deg, #0f1b2c 0%, #0a1523 100%);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .screen-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+    .screen-title small { color: var(--muted-2); display: block; font-size: .72rem; margin-bottom: 3px; }
+    .screen-title strong { font-size: 1.15rem; }
+    .avatar { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(145deg, var(--primary), var(--accent)); }
+    .balance-card {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(67,211,158,.22), rgba(109,168,255,.16));
+      border: 1px solid rgba(255,255,255,.13);
+      margin-bottom: 18px;
+    }
+    .balance-card small { color: #b9cad8; }
+    .balance { font-size: 2rem; font-weight: 850; letter-spacing: -.04em; margin: 5px 0 13px; }
+    .balance-meta { font-size: .78rem; color: #a9cbbf; }
+    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .mini-card { padding: 15px; border-radius: 16px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.075); }
+    .mini-card small { color: var(--muted-2); display: block; }
+    .mini-card strong { display: block; margin-top: 5px; font-size: 1rem; }
+    .activity-title { display: flex; justify-content: space-between; color: #dce8f3; font-size: .86rem; margin: 3px 1px 10px; }
+    .tx { display: grid; grid-template-columns: 38px 1fr auto; gap: 11px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .tx-icon { width: 38px; height: 38px; border-radius: 12px; background: rgba(67,211,158,.11); display: grid; place-items: center; color: var(--primary-2); font-weight: 800; }
+    .tx-name { font-size: .84rem; font-weight: 700; }
+    .tx-sub { font-size: .69rem; color: var(--muted-2); }
+    .tx-amount { font-size: .78rem; font-weight: 750; }
+
+    .section { padding: 92px 0; }
+    .section-kicker { color: var(--primary-2); font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .section h2 {
+      margin: 10px 0 16px;
+      font-size: clamp(2rem, 5vw, 3.45rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      max-width: 760px;
+    }
+    .section-lead { color: var(--muted); max-width: 700px; font-size: 1.05rem; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+    .feature {
+      min-height: 235px;
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+      border: 1px solid var(--border);
+    }
+    .feature-icon {
+      width: 46px; height: 46px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: rgba(67,211,158,.11);
+      color: var(--primary-2);
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .feature h3 { margin: 0 0 9px; font-size: 1.07rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    .privacy-panel {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 30px;
+      align-items: stretch;
+      padding: 38px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(67,211,158,.18);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(67,211,158,.12), transparent 35%),
+        rgba(255,255,255,.045);
+      box-shadow: var(--shadow);
+    }
+    .privacy-points { display: grid; gap: 12px; align-content: start; }
+    .privacy-point { padding: 16px 17px; border-radius: 16px; background: rgba(0,0,0,.16); border: 1px solid rgba(255,255,255,.07); }
+    .privacy-point strong { display: block; margin-bottom: 3px; font-size: .92rem; }
+    .privacy-point span { color: var(--muted); font-size: .86rem; }
+
+    .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 42px; max-width: 830px; }
+    .plan { padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: rgba(255,255,255,.04); }
+    .plan.featured { border-color: rgba(67,211,158,.34); background: linear-gradient(180deg, rgba(67,211,158,.09), rgba(255,255,255,.04)); }
+    .plan small { color: var(--muted-2); }
+    .plan h3 { font-size: 1.35rem; margin: 5px 0 10px; }
+    .plan p { color: var(--muted); font-size: .9rem; }
+    .plan ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; color: #d8e4ee; font-size: .88rem; }
+    .plan li::before { content: "✓"; color: var(--primary); font-weight: 900; margin-right: 9px; }
+
+    .policy-wrap {
+      background: #f7f9fc;
+      color: #182334;
+      border-radius: 34px 34px 0 0;
+      margin-top: 70px;
+      padding: 88px 0 70px;
+    }
+    .policy-wrap .section-kicker { color: #14845e; }
+    .policy-wrap h2 { color: #0c1728; }
+    .policy-meta { color: #66768a; margin-bottom: 36px; }
+    .policy-card { background: white; border: 1px solid #e4e9f0; border-radius: 22px; padding: clamp(24px, 5vw, 44px); box-shadow: 0 18px 48px rgba(27,39,57,.08); }
+    .policy-card h3 { color: #122033; margin-top: 34px; margin-bottom: 10px; font-size: 1.08rem; }
+    .policy-card h3:first-child { margin-top: 0; }
+    .policy-card p { color: #506176; margin: 0 0 13px; }
+    .policy-card a { color: #1268c4; }
+
+    footer { background: #f7f9fc; color: #5d6d80; padding: 28px 0 46px; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 26px; border-top: 1px solid #dde4ec; }
+    .footer-row strong { color: #152337; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: #5d6d80; text-decoration: none; font-size: .87rem; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 38px; padding-top: 62px; }
+      .hero-copy { max-width: 720px; }
+      .app-preview { min-height: 490px; }
+      .phone { transform: none; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .privacy-panel { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      nav { height: 66px; }
+      .nav-cta { display: none !important; }
+      .hero { padding-top: 48px; }
+      h1 { font-size: clamp(3rem, 17vw, 4.8rem); }
+      .features, .plans { grid-template-columns: 1fr; }
+      .section { padding: 70px 0; }
+      .privacy-panel { padding: 25px; }
+      .phone-screen { min-height: 555px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <h1>PeraFlow Privacy Policy</h1>
-  <p class="muted">Effective date: September 7, 2026</p>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="PeraFlow home">
+          <span class="brand-mark">P</span>
+          <span>PeraFlow</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#premium">Premium</a>
+          <a class="nav-cta" href="#policy">Privacy Policy</a>
+        </div>
+      </nav>
+    </div>
+  </div>
 
-  <p>PeraFlow is a personal finance and cashbook application designed to help users record accounts, transactions, balances, and related financial information. This Privacy Policy explains how information is handled when you use PeraFlow.</p>
+  <main id="top">
+    <section class="container hero">
+      <div>
+        <span class="eyebrow">Personal finance, without the clutter</span>
+        <h1><span class="gradient-text">Know where your money goes.</span></h1>
+        <p class="hero-copy">PeraFlow is a focused personal finance and cashbook app for tracking accounts, transactions, balances, transfers, and reports—designed to keep everyday money management simple and understandable.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#features">Explore PeraFlow →</a>
+          <a class="button button-secondary" href="#policy">Read Privacy Policy</a>
+        </div>
+        <div class="trust-row" aria-label="Product highlights">
+          <span><i class="trust-dot"></i> Local-first financial records</span>
+          <span><i class="trust-dot"></i> Optional Google Drive backup</span>
+          <span><i class="trust-dot"></i> Free & Premium access</span>
+        </div>
+      </div>
 
-  <h2>1. Information you enter into PeraFlow</h2>
-  <p>Financial records you create in the app, such as account names, transaction amounts, categories, descriptions, balances, and similar cashbook information, are primarily stored locally on your device in PeraFlow's application data.</p>
-  <p>PeraFlow does not operate a separate developer-owned server that receives or stores your personal cashbook database as part of normal app use.</p>
+      <div class="app-preview" aria-label="PeraFlow dashboard illustration">
+        <div class="glow"></div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="screen-top">
+              <div class="screen-title"><small>Good day</small><strong>My Money</strong></div>
+              <div class="avatar"></div>
+            </div>
+            <div class="balance-card">
+              <small>Total balance</small>
+              <div class="balance">₱48,620.00</div>
+              <div class="balance-meta">Across your active accounts</div>
+            </div>
+            <div class="mini-grid">
+              <div class="mini-card"><small>Income</small><strong>₱32,500</strong></div>
+              <div class="mini-card"><small>Expenses</small><strong>₱18,240</strong></div>
+            </div>
+            <div class="activity-title"><span>Recent activity</span><span>September</span></div>
+            <div class="tx"><div class="tx-icon">F</div><div><div class="tx-name">Food & Dining</div><div class="tx-sub">Today</div></div><div class="tx-amount">−₱540</div></div>
+            <div class="tx"><div class="tx-icon">S</div><div><div class="tx-name">Salary</div><div class="tx-sub">Sep 08</div></div><div class="tx-amount">+₱16,250</div></div>
+            <div class="tx"><div class="tx-icon">T</div><div><div class="tx-name">Transfer</div><div class="tx-sub">Sep 07</div></div><div class="tx-amount">₱2,000</div></div>
+            <div class="tx"><div class="tx-icon">B</div><div><div class="tx-name">Bills</div><div class="tx-sub">Sep 06</div></div><div class="tx-amount">−₱1,890</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h2>2. Google account and Google Drive backup</h2>
-  <p>If you choose to use Google Drive backup or restore features, PeraFlow may request access to your Google account and Google Drive as necessary to create, find, upload, download, and restore PeraFlow backup files.</p>
-  <p>Google account authorization is used only to provide the backup and restore functionality that you request. Backup files are stored in your Google Drive account and are subject to Google's own terms and privacy practices.</p>
+    <section id="features" class="container section">
+      <div class="section-kicker">Built for daily use</div>
+      <h2>Everything you need to understand your cash flow.</h2>
+      <p class="section-lead">PeraFlow keeps the essentials close: record money movement, organize accounts, review reports, and keep backups available when you need them.</p>
+      <div class="features">
+        <article class="feature"><div class="feature-icon">₱</div><h3>Accounts & balances</h3><p>Keep separate accounts organized and see how your money is distributed at a glance.</p></article>
+        <article class="feature"><div class="feature-icon">↕</div><h3>Transactions & transfers</h3><p>Record income and expenses, categorize activity, and move money between accounts clearly.</p></article>
+        <article class="feature"><div class="feature-icon">◫</div><h3>Useful reports</h3><p>Turn transaction history into practical views that make spending and cash movement easier to understand.</p></article>
+        <article class="feature"><div class="feature-icon">☁</div><h3>Backup & restore</h3><p>Create local backups or use Google Drive backup and restore when you choose to connect your account.</p></article>
+        <article class="feature"><div class="feature-icon">◎</div><h3>Opening balances</h3><p>Start accounts with an opening balance that stays represented in your transaction history.</p></article>
+        <article class="feature"><div class="feature-icon">★</div><h3>Flexible access</h3><p>Use the free experience or upgrade to Premium for unlimited accounts, full reports, automatic Drive backup, and no ads.</p></article>
+      </div>
+    </section>
 
-  <h2>3. Advertising</h2>
-  <p>PeraFlow may use Google AdMob to display advertisements. Google and its advertising partners may collect or process information such as device identifiers, IP address, approximate location derived from network information, app interaction data, diagnostic information, and advertising-related data in accordance with their own policies and your device or consent settings.</p>
-  <p>PeraFlow does not directly control all data collected by the Google Mobile Ads SDK.</p>
+    <section id="privacy" class="container section">
+      <div class="privacy-panel">
+        <div>
+          <div class="section-kicker">Privacy-first by design</div>
+          <h2>Your cashbook stays under your control.</h2>
+          <p class="section-lead">PeraFlow does not operate a separate developer-owned server that receives or stores your personal cashbook database during normal app use. Your financial records are primarily stored locally on your device.</p>
+        </div>
+        <div class="privacy-points">
+          <div class="privacy-point"><strong>Local-first storage</strong><span>Account and transaction records are primarily stored in PeraFlow's application data on your device.</span></div>
+          <div class="privacy-point"><strong>Optional Google Drive backup</strong><span>Drive access is requested only when you choose to use PeraFlow's Google Drive backup or restore features.</span></div>
+          <div class="privacy-point"><strong>Google Play handles purchases</strong><span>PeraFlow does not receive or store your full payment card details for Premium purchases.</span></div>
+          <div class="privacy-point"><strong>No sale of personal financial records</strong><span>PeraFlow does not sell the personal financial records you enter into the app.</span></div>
+        </div>
+      </div>
+    </section>
 
-  <h2>4. Premium purchases and Google Play Billing</h2>
-  <p>If you purchase Premium or another eligible digital product through PeraFlow, payment processing is handled by Google Play. PeraFlow does not receive or store your full payment card details. The app may receive purchase status or entitlement information needed to determine whether a purchase is active.</p>
+    <section id="premium" class="container section">
+      <div class="section-kicker">Choose what fits</div>
+      <h2>Start free. Upgrade when PeraFlow becomes part of your routine.</h2>
+      <p class="section-lead">Free users keep useful personal-finance functionality. Premium adds more capacity and convenience, while temporary Rewarded Ad-Free access only removes ads and does not unlock Premium features.</p>
+      <div class="plans">
+        <article class="plan">
+          <small>Essential</small>
+          <h3>Free</h3>
+          <p>For straightforward day-to-day cashbook tracking.</p>
+          <ul>
+            <li>Up to 3 active accounts</li>
+            <li>Core transaction tracking</li>
+            <li>Basic monthly reporting</li>
+            <li>Local backup and restore</li>
+          </ul>
+        </article>
+        <article class="plan featured">
+          <small>Full experience</small>
+          <h3>Premium</h3>
+          <p>For users who want fewer limits and more automation.</p>
+          <ul>
+            <li>No ads</li>
+            <li>Unlimited active accounts</li>
+            <li>Full reports</li>
+            <li>Automatic Google Drive backup</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-  <h2>5. Voluntary support</h2>
-  <p>PeraFlow may provide an option for users to make a voluntary contribution to support development. A voluntary contribution is separate from Premium and does not grant digital features, content, ad removal, or other in-app benefits.</p>
+    <section id="policy" class="policy-wrap">
+      <div class="container">
+        <div class="section-kicker">Legal & transparency</div>
+        <h2>Privacy Policy</h2>
+        <p class="policy-meta">Effective date: September 7, 2026</p>
+        <div class="policy-card">
+          <p>PeraFlow is a personal finance and cashbook application designed to help users record accounts, transactions, balances, and related financial information. This Privacy Policy explains how information is handled when you use PeraFlow.</p>
 
-  <h2>6. Diagnostics and app operation</h2>
-  <p>Third-party platform services or SDKs used by the app may process technical or diagnostic information needed for app operation, security, advertising, billing, authentication, crash handling, or service reliability.</p>
+          <h3>1. Information you enter into PeraFlow</h3>
+          <p>Financial records you create in the app, such as account names, transaction amounts, categories, descriptions, balances, and similar cashbook information, are primarily stored locally on your device in PeraFlow's application data.</p>
+          <p>PeraFlow does not operate a separate developer-owned server that receives or stores your personal cashbook database as part of normal app use.</p>
 
-  <h2>7. How information is used</h2>
-  <p>Information handled by PeraFlow is used to provide the app's core functions, maintain your financial records on your device, perform user-requested backup and restore operations, verify Premium purchase status, display advertisements where applicable, troubleshoot problems, and improve reliability.</p>
+          <h3>2. Google account and Google Drive backup</h3>
+          <p>If you choose to use Google Drive backup or restore features, PeraFlow may request access to your Google account and Google Drive as necessary to create, find, upload, download, and restore PeraFlow backup files.</p>
+          <p>Google account authorization is used only to provide the backup and restore functionality that you request. Backup files are stored in your Google Drive account and are subject to Google's own terms and privacy practices.</p>
 
-  <h2>8. Data sharing</h2>
-  <p>PeraFlow does not sell your personal financial records. Information may be processed by third-party service providers only where needed for features you use, including Google Play services, Google Drive, Google authentication services, Google Play Billing, and Google AdMob.</p>
+          <h3>3. Advertising</h3>
+          <p>PeraFlow may use Google AdMob to display advertisements. Google and its advertising partners may collect or process information such as device identifiers, IP address, approximate location derived from network information, app interaction data, diagnostic information, and advertising-related data in accordance with their own policies and your device or consent settings.</p>
+          <p>PeraFlow does not directly control all data collected by the Google Mobile Ads SDK.</p>
 
-  <h2>9. Data retention and deletion</h2>
-  <p>Local PeraFlow data remains on your device until you delete it, clear the app's data, uninstall the app, or use a feature that removes that data. Google Drive backups remain in your Google Drive account until you delete them or otherwise manage them through your Google account.</p>
-  <p>Because PeraFlow does not maintain a separate developer-owned account database for your cashbook records, deletion of local financial data is generally controlled directly by you on your device. You can also revoke PeraFlow's Google account access through your Google account permissions.</p>
+          <h3>4. Premium purchases and Google Play Billing</h3>
+          <p>If you purchase Premium or another eligible digital product through PeraFlow, payment processing is handled by Google Play. PeraFlow does not receive or store your full payment card details. The app may receive purchase status or entitlement information needed to determine whether a purchase is active.</p>
 
-  <h2>10. Security</h2>
-  <p>Reasonable technical measures are used to reduce unauthorized access to app data, but no storage or transmission method can be guaranteed to be completely secure. You are responsible for protecting access to your device and Google account.</p>
+          <h3>5. Voluntary support</h3>
+          <p>PeraFlow may provide an option for users to make a voluntary contribution to support development. A voluntary contribution is separate from Premium and does not grant digital features, content, ad removal, or other in-app benefits.</p>
 
-  <h2>11. Children's privacy</h2>
-  <p>PeraFlow is not specifically directed to children. The app is intended as a personal finance utility. If the app's target audience or functionality changes, this policy may be updated as required.</p>
+          <h3>6. Diagnostics and app operation</h3>
+          <p>Third-party platform services or SDKs used by the app may process technical or diagnostic information needed for app operation, security, advertising, billing, authentication, crash handling, or service reliability.</p>
 
-  <h2>12. Third-party services</h2>
-  <p>PeraFlow may rely on services provided by Google, including Google Play, Google Drive, Google authentication services, Google Play Billing, and Google AdMob. Their handling of data is governed by their own privacy policies and terms.</p>
+          <h3>7. How information is used</h3>
+          <p>Information handled by PeraFlow is used to provide the app's core functions, maintain your financial records on your device, perform user-requested backup and restore operations, verify Premium purchase status, display advertisements where applicable, troubleshoot problems, and improve reliability.</p>
 
-  <h2>13. Changes to this Privacy Policy</h2>
-  <p>This Privacy Policy may be updated when PeraFlow's features, data practices, or legal requirements change. The effective date at the top of this page will be updated when material changes are made.</p>
+          <h3>8. Data sharing</h3>
+          <p>PeraFlow does not sell your personal financial records. Information may be processed by third-party service providers only where needed for features you use, including Google Play services, Google Drive, Google authentication services, Google Play Billing, and Google AdMob.</p>
 
-  <h2>14. Contact</h2>
-  <p>For privacy questions or requests related to PeraFlow, you can contact the developer through the public PeraFlow privacy repository:</p>
-  <p><a href="https://github.com/adrian1612/peraflow-privacy/issues">https://github.com/adrian1612/peraflow-privacy/issues</a></p>
+          <h3>9. Data retention and deletion</h3>
+          <p>Local PeraFlow data remains on your device until you delete it, clear the app's data, uninstall the app, or use a feature that removes that data. Google Drive backups remain in your Google Drive account until you delete them or otherwise manage them through your Google account.</p>
+          <p>Because PeraFlow does not maintain a separate developer-owned account database for your cashbook records, deletion of local financial data is generally controlled directly by you on your device. You can also revoke PeraFlow's Google account access through your Google account permissions.</p>
 
-  <p class="muted">Developer: PeraFlow</p>
+          <h3>10. Security</h3>
+          <p>Reasonable technical measures are used to reduce unauthorized access to app data, but no storage or transmission method can be guaranteed to be completely secure. You are responsible for protecting access to your device and Google account.</p>
+
+          <h3>11. Children's privacy</h3>
+          <p>PeraFlow is not specifically directed to children. The app is intended as a personal finance utility. If the app's target audience or functionality changes, this policy may be updated as required.</p>
+
+          <h3>12. Third-party services</h3>
+          <p>PeraFlow may rely on services provided by Google, including Google Play, Google Drive, Google authentication services, Google Play Billing, and Google AdMob. Their handling of data is governed by their own privacy policies and terms.</p>
+
+          <h3>13. Changes to this Privacy Policy</h3>
+          <p>This Privacy Policy may be updated when PeraFlow's features, data practices, or legal requirements change. The effective date at the top of this page will be updated when material changes are made.</p>
+
+          <h3>14. Contact</h3>
+          <p>For privacy questions or requests related to PeraFlow, you can contact the developer through the public PeraFlow privacy repository:</p>
+          <p><a href="https://github.com/adrian1612/peraflow-privacy/issues">github.com/adrian1612/peraflow-privacy/issues</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div><strong>PeraFlow</strong><br><span>Personal finance, made clear.</span></div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#premium">Premium</a>
+        <a href="#policy">Privacy Policy</a>
+        <a href="https://github.com/adrian1612/peraflow-privacy/issues">Contact</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
